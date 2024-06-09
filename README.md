@@ -1,5 +1,16 @@
-# Abbreviation Plus Pseudo-Precision (Ab3P) #
+# Ab3P Python Wrapper
+## How to compile Python wrapper
+```shell
+# these options added to makefile：-fPIC -D_GLIBCXX_USE_CXX11_ABI=0
+# two new file: CWrapper.h and CWrapper.cpp, compiled to libAb3PWrapper.so, which will be loaded in python.
+g++ -shared -o libAb3PWrapper.so CWrapper.cpp -L./lib -L/data/www/NCBITextLib/lib -I/data/www/NCBITextLib/include -I./lib -lAb3P -lText -fPIC -D_GLIBCXX_USE_CXX11_ABI=0
+```
+## How to use it in python
+[abbrev_utils.py](abbrev_utils.py) provides a useful utilities, including reading 
+source content from a csv file line by line, and running the c++ code in the subprocess
+to avoid potential bugs that may cause infinite loops or memory overflow errors.
 
+# Abbreviation Plus Pseudo-Precision (Ab3P) #
 Ab3P is an abbreviation definition detector. A set of rules recognizes
 simple patterns such as Alpha Beta (AB) as well as more involved
 cases. The precision of each rule is estimated by applying to
